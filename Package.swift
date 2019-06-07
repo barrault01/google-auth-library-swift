@@ -19,29 +19,16 @@ import PackageDescription
 let package = Package(
   name: "Auth",
   products: [
-    .library(name: "OAuth1", targets: ["OAuth1"]),
     .library(name: "OAuth2", targets: ["OAuth2"]),
-    .library(name: "TinyHTTPServer", targets: ["TinyHTTPServer"]),
     .library(name: "SwiftyBase64", targets: ["SwiftyBase64"]),
   ],
   dependencies: [
-    .package(url: "https://github.com/apple/swift-nio.git", from: "2.0.0"),
     .package(url: "https://github.com/krzyzanowskim/CryptoSwift.git", from: "1.0.0"),
     .package(url: "https://github.com/attaswift/BigInt", from: "4.0.0"),
   ],
   targets: [
-    .target(name: "OAuth1",
-            dependencies: ["CryptoSwift", "TinyHTTPServer"]),
     .target(name: "OAuth2",
-            dependencies: ["CryptoSwift", "TinyHTTPServer", "BigInt", "SwiftyBase64"]),
-    .target(name: "TinyHTTPServer",
-	    dependencies: ["NIO", "NIOHTTP1"]),
+            dependencies: ["CryptoSwift", "BigInt", "SwiftyBase64"]),
     .target(name: "SwiftyBase64"),
-    .target(name: "TokenSource", dependencies: ["OAuth2"], path: "Sources/Examples/TokenSource"),
-    .target(name: "Google",      dependencies: ["OAuth2"], path: "Sources/Examples/Google"),
-    .target(name: "GitHub",      dependencies: ["OAuth2"], path: "Sources/Examples/GitHub"),
-    .target(name: "Meetup",      dependencies: ["OAuth2"], path: "Sources/Examples/Meetup"),
-    .target(name: "Spotify",     dependencies: ["OAuth2"], path: "Sources/Examples/Spotify"),
-    .target(name: "Twitter",     dependencies: ["OAuth1"], path: "Sources/Examples/Twitter"),
   ]
 )
